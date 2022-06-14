@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol WeatherManagerDelegate {
     func didUpdateWeather(_ weatherManager:WeatherManager, weather: WeatherModel)
@@ -47,7 +48,9 @@ struct WeatherManager {
             let id = (decodedData.weather[0].id)
             let temp = decodedData.main.temp
             let name = decodedData.name
-            let weather = WeatherModel(conditionId: id, cityName: name, temperature: temp)
+            let pressure = decodedData.main.pressure
+            let dt = decodedData.dt
+            let weather = WeatherModel(conditionId: id, cityName: name, temperature: temp,dataTime: dt, pressure: pressure)
             return weather
         } catch {
             delegate?.didFailWithError(error: error)

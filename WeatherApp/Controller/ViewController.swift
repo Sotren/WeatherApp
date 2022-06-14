@@ -10,6 +10,8 @@ import CoreLocation
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var dataLabel: UILabel!
+    @IBOutlet weak var pressureLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var conditionImageView: UIImageView!
@@ -58,9 +60,13 @@ extension ViewController: UITextFieldDelegate {
 extension ViewController: WeatherManagerDelegate {
     func didUpdateWeather(_ weatherManager:WeatherManager, weather: WeatherModel) {
         DispatchQueue.main.async {
+            let date = NSDate(timeIntervalSince1970: TimeInterval(weather.dataTime))
             self.temperatureLabel.text = weather.temperatureString
             self.conditionImageView.image = UIImage(systemName: weather.conditionName)
             self.locationLabel.text = weather.cityName
+            self.pressureLabel.text = "\(weather.pressure)"
+            self.dataLabel.text = "\(date)"
+          
         }
        
     }
