@@ -64,6 +64,7 @@
 		EBF7A74428533AB000442775 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				EBF7A74928533AB000442775 /* ViewController.swift */,
 				EBF7A77D28588A4C00442775 /* Model */,
 				EBF7A77E28588A5B00442775 /* Controller */,
 				EBF7A78028588A6A00442775 /* View */,
@@ -105,7 +106,6 @@
 		EBF7A77E28588A5B00442775 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				EBF7A74928533AB000442775 /* ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
