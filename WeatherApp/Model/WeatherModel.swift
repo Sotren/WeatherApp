@@ -15,7 +15,6 @@ struct WeatherModel {
     let pressure: Int
     var temperatureString: String {
         return String(format: "%.1f", temperature)
-        
     }
     var conditionName: String {
         switch conditionId {

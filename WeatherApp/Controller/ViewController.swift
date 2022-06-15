@@ -59,11 +59,11 @@ extension ViewController: UITextFieldDelegate {
         if textField.text != " " {
             return true
         } else {
+            textField.placeholder = "Type here"
             return true
         }
     }
 }
-
 //MARK: - WeatherManagerDelegate
 extension ViewController: WeatherManagerDelegate {
     

@@ -9,8 +9,8 @@ import Foundation
 import Alamofire
 
 protocol WeatherManagerDelegate {
-    func didUpdateWeather(_ weatherManager:WeatherManager, weather: WeatherModel)
-    func didFailWithError(error:Error)
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel)
+    func didFailWithError(error: Error)
 }
 
 struct WeatherManager {
@@ -18,12 +18,12 @@ struct WeatherManager {
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=13f26fc1012df059f2780615158329a4&units=metric"
     var delegate: WeatherManagerDelegate?
     
-    func fetchWeather(cityName:String) {
+    func fetchWeather(cityName: String) {
         let urlString = "\(weatherURL)&q=\(cityName)"
         performRequest(with: urlString)
     }
     
-    func performRequest(with urlString:String) {
+    func performRequest(with urlString: String) {
         if let url = URL(string: urlString) {
             let session =  URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
