@@ -93,7 +93,3 @@ extension ViewController: CLLocationManagerDelegate {
     }
     
 }
-//MARK: -  CLLocationManagerDelegate
-extension ViewController: CLLocationManagerDelegate {
-    
-}
