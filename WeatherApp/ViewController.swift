@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController {
 
     let locationManager = CLLocationManager()
     @IBOutlet weak var locationLabel: UILabel!
@@ -39,4 +39,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
     }
+}
+//MARK: -  CLLocationManagerDelegate
+extension ViewController: CLLocationManagerDelegate {
+    
 }
