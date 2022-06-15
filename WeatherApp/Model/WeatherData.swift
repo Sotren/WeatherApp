@@ -17,6 +17,7 @@ struct WeatherData: Codable {
         let temp: Double
         let pressure: Int
     }
+    
     struct Weather: Codable {
         let id: Int
     }

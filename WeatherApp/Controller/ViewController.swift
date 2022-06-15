@@ -21,12 +21,19 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //setupLocationManager()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         weatherManager.delegate = self
         searchTextField.delegate = self
+    }
+    
+    func dateFormatter(date: Int) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        dateFormatter.dateFormat = "dd-MMMM-HH:mm"
+        let stringDate = dateFormatter.string(from: Date())
+        return stringDate
     }
 }
 //MARK: - UITextFieldDelegate
@@ -40,17 +47,18 @@ extension ViewController: UITextFieldDelegate {
         searchTextField.endEditing(true)
         return true
     }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let city = textField.text{
             weatherManager.fetchWeather(cityName: city)
         }
         searchTextField.text = ""
     }
+    
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField.text != " " {
             return true
         } else {
-            textField.placeholder = "Type here"
             return true
         }
     }
@@ -58,17 +66,15 @@ extension ViewController: UITextFieldDelegate {
 
 //MARK: - WeatherManagerDelegate
 extension ViewController: WeatherManagerDelegate {
-    func didUpdateWeather(_ weatherManager:WeatherManager, weather: WeatherModel) {
+    
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
         DispatchQueue.main.async {
-            let date = NSDate(timeIntervalSince1970: TimeInterval(weather.dataTime))
             self.temperatureLabel.text = weather.temperatureString
             self.conditionImageView.image = UIImage(systemName: weather.conditionName)
             self.locationLabel.text = weather.cityName
             self.pressureLabel.text = "\(weather.pressure)"
-            self.dataLabel.text = "\(date)"
-          
+            self.dataLabel.text = self.dateFormatter(date: weather.dataTime)
         }
-       
     }
     
     func didFailWithError(error: Error) {
@@ -77,9 +83,11 @@ extension ViewController: WeatherManagerDelegate {
 }
 //MARK: - CLLocationManager
 extension ViewController: CLLocationManagerDelegate {
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("got")
+        
     }
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
